@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -51,31 +52,31 @@ class User
     private $profilePic;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    private $coverPic;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $bio;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\School", inversedBy="student")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $school;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\Length(
-     *     min: 6,
-     *     max: 50,
+     *     min = 6,
+     *     max = 50,
      *     minMessage = "Le mot de passe doit faire au moins 6 caractères",
      *     maxMessage = "Le mot de passe doit faire moins de 50 caractères"
      * )
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="simple_array")
+     */
+    private $roles = ['ROLE_USER'];
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\School")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $school;
 
     public function getId(): ?int
     {
@@ -166,18 +167,6 @@ class User
         return $this;
     }
 
-    public function getSchool(): ?School
-    {
-        return $this->school;
-    }
-
-    public function setSchool(?School $school): self
-    {
-        $this->school = $school;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -186,6 +175,58 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized, array('allowed_classes' => false));
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $schoolId): self
+    {
+        $this->school = $schoolId;
 
         return $this;
     }
