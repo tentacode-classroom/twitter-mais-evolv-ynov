@@ -8,6 +8,7 @@
 // any CSS you require will output into a single css file (app.css in this case)
 require("../css/app.css");
 require('../css/bootswatch.min.css');
+require('../css/Count.css');
 
 const $ = require('jquery');
 require('bootstrap');
