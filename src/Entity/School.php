@@ -24,11 +24,6 @@ class School
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="school")
-     */
-    private $student;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
@@ -36,6 +31,7 @@ class School
     public function __construct()
     {
         $this->student = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,29 +59,6 @@ class School
         return $this->student;
     }
 
-    public function addStudent(User $student): self
-    {
-        if (!$this->student->contains($student)) {
-            $this->student[] = $student;
-            $student->setSchool($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStudent(User $student): self
-    {
-        if ($this->student->contains($student)) {
-            $this->student->removeElement($student);
-            // set the owning side to null (unless already changed)
-            if ($student->getSchool() === $this) {
-                $student->setSchool(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -97,4 +70,5 @@ class School
 
         return $this;
     }
+
 }
