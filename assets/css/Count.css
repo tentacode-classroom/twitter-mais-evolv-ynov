@@ -3,16 +3,3 @@
     display:flex;
     justify-content: space-between;
 }
-
-
-.profile_pic_userview {
-    max-width: 130px;
-}
-
-.user_info_user_view {
-    text-align: center;
-}
-
-.user_bio_user_view {
-    text-align: justify;
-}
