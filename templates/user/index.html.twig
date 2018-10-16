@@ -3,26 +3,32 @@
 {% block title %}Mon compte{% endblock %}
 
 {% block body %}
-<div class="container">
-  <!-- Example row of columns -->
-  <div class="page_count">
-    <div class="bio">
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Profil</h2>
-          <p>Arthur Genthial</p>
-          <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+<div class="container" style="border: 1px solid red">
+
+    <div class="row">
+
+        <div class="col-4 user_info_user_view" style="border: 1px solid white; padding: 10px;">
+            <img src="images/{{ user.profilePic }}" alt="Photo de profile de {{ user.userName }}" class="img-thumbnail profile_pic_userview">
+            <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+
+            <p><span class="badge badge-info">{{ user.school.name }}</span> @{{ user.username }}</p>
+
+            <p class="user_bio_user_view">{{ user.bio }}</p>
+
+            {% if is_granted('ROLE_USER') and current_user.id != user.id %}
+                {% if not subscribed %}
+                    <a class="btn btn-primary" href="{{ path('subscribe', { 'id': user.id }) }}" role="button">S'abonner</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('unsubscribe', { 'id': user.id }) }}" role="button">Se désabonner</a>
+                {% endif %}
+            {% endif %}
+            <p class="subscribers_info_user_view">{{ nb_subscriptions }} abonnement(s) • {{ nb_subscribers }} abonné(s)</p>
         </div>
-      </div>
-    </div>
-    <div class="friend">
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Suggestion</h2>
-          <p>Pblito escobar</p>
-          <p><a class="btn btn-secondary" href="#" role="button">Add new Friends</a></p>
+        <div class="col-8" style="border: 1px solid white;">
+            world
         </div>
-      </div>
+
     </div>
-  </div>
+
+</div>
 {% endblock %}
