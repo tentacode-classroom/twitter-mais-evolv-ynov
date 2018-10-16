@@ -1,0 +1,7 @@
+.form-login
+{
+    diplay:flex;
+    width:50%;
+    margin: auto;
+    flex-direction: column;
+}
