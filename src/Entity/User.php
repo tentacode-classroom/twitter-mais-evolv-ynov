@@ -107,7 +107,7 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getUserName(): ?string
+    public function getUsername(): ?string
     {
         return $this->userName;
     }
@@ -200,7 +200,7 @@ class User implements UserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->email,
+            $this->userName,
             $this->password,
             // see section on salt below
             // $this->salt,
@@ -212,7 +212,7 @@ class User implements UserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->email,
+            $this->userName,
             $this->password,
             // see section on salt below
             // $this->salt
