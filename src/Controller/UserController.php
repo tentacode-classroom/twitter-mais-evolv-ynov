@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Entity\User;
 use App\Entity\Friends;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,13 +51,19 @@ class UserController extends AbstractController
             ->findBy(['follower' => $user]);
         $nbSubscriptions = count($subscriptions);
 
+        // User messages :
+        $messages = $this->getDoctrine()
+            ->getRepository(Message::class)
+            ->findBy(['author_id' => $user->getId()]);
+
 
         return $this->render('user/index.html.twig', [
             'user' => $user,
             'current_user' => $currentUser,
             'subscribed' => $subscribed,
             'nb_subscribers' => $nbSubscribers,
-            'nb_subscriptions' => $nbSubscriptions
+            'nb_subscriptions' => $nbSubscriptions,
+            'messages' => $messages
         ]);
     }
 

@@ -27,9 +27,21 @@ class Message
     private $content;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $author_id;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $date;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $retweet_id;
+
+
 
     public function getId(): ?int
     {
@@ -60,6 +72,18 @@ class Message
         return $this;
     }
 
+    public function getAuthorId(): ?int
+    {
+        return $this->author_id;
+    }
+
+    public function setAuthorId(int $author_id): self
+    {
+        $this->author_id = $author_id;
+
+        return $this;
+    }
+
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
@@ -68,6 +92,18 @@ class Message
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getRetweetId(): ?int
+    {
+        return $this->retweet_id;
+    }
+
+    public function setRetweetId(?int $retweet_id): self
+    {
+        $this->retweet_id = $retweet_id;
 
         return $this;
     }
