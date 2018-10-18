@@ -36,6 +36,15 @@ class UserRepository extends ServiceEntityRepository
     }
     */
 
+    public function findNameLike($name) {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.userName LIKE :val')
+            ->setParameter('val', '%'.$name.'%')
+            ->getQuery()
+            ->getResult();
+
+    }
+
     /*
     public function findOneBySomeField($value): ?User
     {
