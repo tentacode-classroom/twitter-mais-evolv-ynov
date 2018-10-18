@@ -22,7 +22,7 @@ class SignupType extends AbstractType
             ->add('lastName', TextType::class, [
                 'label' => 'Nom'
             ])
-            ->add('userName', TextType::class, [
+            ->add('username', TextType::class, [
                 'label' => 'Nom d\'utilisateur'
             ])
             ->add('email', EmailType::class, [
