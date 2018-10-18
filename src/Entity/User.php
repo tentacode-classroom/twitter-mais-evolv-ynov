@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -78,6 +80,16 @@ class User implements UserInterface, \Serializable
      */
     private $school;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Friends", mappedBy="user")
+     */
+    private $friends;
+
+    public function __construct()
+    {
+        $this->friends = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,7 +119,7 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getUserName(): ?string
+    public function getUsername(): ?string
     {
         return $this->userName;
     }
@@ -139,18 +151,6 @@ class User implements UserInterface, \Serializable
     public function setProfilePic(?string $profilePic): self
     {
         $this->profilePic = $profilePic;
-
-        return $this;
-    }
-
-    public function getCoverPic(): ?string
-    {
-        return $this->coverPic;
-    }
-
-    public function setCoverPic(?string $coverPic): self
-    {
-        $this->coverPic = $coverPic;
 
         return $this;
     }
@@ -200,7 +200,7 @@ class User implements UserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->email,
+            $this->userName,
             $this->password,
             // see section on salt below
             // $this->salt,
@@ -212,7 +212,7 @@ class User implements UserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->email,
+            $this->userName,
             $this->password,
             // see section on salt below
             // $this->salt
@@ -227,6 +227,37 @@ class User implements UserInterface, \Serializable
     public function setSchool(?School $schoolId): self
     {
         $this->school = $schoolId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Friends[]
+     */
+    public function getFriends(): Collection
+    {
+        return $this->friends;
+    }
+
+    public function addFriend(Friends $friend): self
+    {
+        if (!$this->friends->contains($friend)) {
+            $this->friends[] = $friend;
+            $friend->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriend(Friends $friend): self
+    {
+        if ($this->friends->contains($friend)) {
+            $this->friends->removeElement($friend);
+            // set the owning side to null (unless already changed)
+            if ($friend->getUser() === $this) {
+                $friend->setUser(null);
+            }
+        }
 
         return $this;
     }

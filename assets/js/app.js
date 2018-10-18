@@ -10,6 +10,7 @@ require("../css/app.css");
 require('../css/bootswatch.min.css');
 require('../css/Count.css');
 require('../css/login.css');
+require('../css/tom.css');
 
 const $ = require('jquery');
 require('bootstrap');
