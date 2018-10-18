@@ -23,8 +23,8 @@ security:
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
             form_login:
-                login_path: login
-                check_path: login
+                login_path: /
+                check_path: /
 
             logout:
                 path:   /logout

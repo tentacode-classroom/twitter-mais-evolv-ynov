@@ -1,1 +1,35 @@
-{% extends "base.html.twig" %}{% block title %}Bienvenue{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+
+<div class="container">
+    <div class = "row justify-content-md-center">
+    <div class="col-md-4">
+        <div class="justify-content-lg-center">
+            <img class="center-block mt-5 mr-auto mb-5" src="https://svgsilh.com/svg/47367-03a9f4.svg" alt="" width="72" height="72"/>
+        </div>
+
+    <form class="form-signin" action="{{ path('home') }}" method="post" class="form-login">
+
+        <h1 class="h3 mb-3 font-weight-normal">Entrez vos identifiants</h1>
+
+        <label for="username" class="sr-only">Nom d'utilisateur</label>
+        <input type="text" id="username" name="_username" class="form-control" value ="{{ last_username }}"  placeholder="Username" required autofocus />
+
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="_password"class="form-control" placeholder="Password" required />
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2018-2019 </p>
+    </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

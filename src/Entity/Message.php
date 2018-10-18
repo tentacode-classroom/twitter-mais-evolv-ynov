@@ -18,11 +18,6 @@ class Message
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $parent_id;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Length(
@@ -48,23 +43,16 @@ class Message
      */
     private $author;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Message")
+     */
+    private $parent;
+
 
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getParentId(): ?int
-    {
-        return $this->parent_id;
-    }
-
-    public function setParentId(?int $parent_id): self
-    {
-        $this->parent_id = $parent_id;
-
-        return $this;
     }
 
     public function getContent(): ?string
@@ -111,6 +99,18 @@ class Message
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
 
         return $this;
     }

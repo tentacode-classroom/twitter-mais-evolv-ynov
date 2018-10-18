@@ -32,7 +32,7 @@
     border: 2px solid grey;
     background-color: #B2B2B2;
     border-radius: 5px;
-    padding: 3px;
+    padding: 10px;
     margin-bottom: 20px;
 }
 
@@ -42,7 +42,29 @@
     padding: 5px 0 3px 0;
 }
 
-.messages_blocks_user_view a {
+.tweet_action_buttons a {
     margin: 0;
-    font-size: 10px;
+    font-size: 13px;
+}
+
+.img-thumbnail-tweet {
+    max-width: 70px;
+    border-radius: 50px;
+}
+
+.image_tweet_zone {
+    max-width: 80px;
+}
+
+.row_tweet_feed_view {
+    margin-bottom: 10px;
+}
+
+.tweet_username_feed_view {
+    border-bottom: 1px solid white;
+    font-size: 17px;
+}
+
+.tweet_username_feed_view:hover {
+    text-decoration: none;
 }

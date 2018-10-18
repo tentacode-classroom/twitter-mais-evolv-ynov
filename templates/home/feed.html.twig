@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container page_container_user_view">
     <div class="row">
-        <div class="col-4 user_info_user_view">
+        <div class="col-3 user_info_user_view">
             <img src="/images/{{ user.profilepic }}" alt="Photo de profile de @{{ user.username }}" class="img-thumbnail profile_pic_user_view">
             <h3>{{ user.firstname }} {{ user.lastname }}</h3>
 
@@ -13,12 +13,22 @@
 
             <p class="user_bio_user_view">{{ user.bio }}</p>
         </div>
-        <div class="col-8">
+        <div class="col-9">
             <h1>Fil d'actualité</h1>
             {% for message in messages %}
                 <div class="container messages_blocks_user_view">
-                    <p>{{ message.content }}</p>
-                    <a href="">Répondre</a>
+                    <div class="row row_tweet_feed_view">
+                        <div class="col-2 image_tweet_zone">
+                            <img src="/images/{{ message.author.profilepic }}" alt="" class="img-thumbnail-tweet" />
+                        </div>
+                        <div class="col-9">
+                            <p><a href="/user/{{ message.author.username }}" class="tweet_username_feed_view">{{ message.author.firstname }} {{ message.author.lastname }}</a></p>
+                            <p>{{ message.content }}</p>
+                        </div>
+                    </div>
+                    <div class="tweet_action_buttons">
+                        <a href="{{ path('answer', { 'messageId': message.id }) }}">Répondre</a>
+                    </div>
                 </div>
             {% endfor %}
         </div>

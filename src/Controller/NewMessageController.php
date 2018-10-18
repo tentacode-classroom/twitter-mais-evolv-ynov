@@ -7,16 +7,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/new-message")
- */
+
 class NewMessageController extends AbstractController
 {
     /**
-     * @Route("/", name="new_message")
+     * @Route("/new-message", name="new_message")
      */
     public function index(Request $request)
     {
+        $user = $this->getUser();
+
         $form = $this->createForm(NewMessageType::class);
         $form->handleRequest($request);
 
@@ -36,7 +36,8 @@ class NewMessageController extends AbstractController
         }
 
         return $this->render('new_message/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 }
