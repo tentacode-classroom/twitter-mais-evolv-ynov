@@ -1,13 +1,19 @@
 /*
-    /!\ TOUCHEZ PAS À CE FICHIER SVP /!\
+    /!\ NE TOUCHEZ PAS À CE FICHIER SVP /!\
  */
 
-.profile_pic_userview {
+.page_container_user_view {
+    margin-top: 10px;
+}
+
+.profile_pic_user_view {
     max-width: 130px;
+    padding: 10px;
 }
 
 .user_info_user_view {
     text-align: center;
+    border-right: 1px solid white;
 }
 
 .user_bio_user_view {
@@ -16,4 +22,27 @@
 
 .subscribers_info_user_view {
     margin-top: 10px;
+}
+
+.display_messages_user_view {
+    padding-top: 20px;
+}
+
+.messages_blocks_user_view {
+    border: 2px solid grey;
+    background-color: #B2B2B2;
+    border-radius: 5px;
+    padding: 3px;
+    margin-bottom: 20px;
+}
+
+.messages_blocks_user_view p {
+    color: black;
+    margin-bottom: 0;
+    padding: 5px 0 3px 0;
+}
+
+.messages_blocks_user_view a {
+    margin: 0;
+    font-size: 10px;
 }

@@ -22,3 +22,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-pack ###
+
+src/Migrations/Version20181018100649\.php

@@ -3,12 +3,12 @@
 {% block title %}Mon compte{% endblock %}
 
 {% block body %}
-<div class="container" style="border: 1px solid red">
+<div class="container page_container_user_view">
 
     <div class="row">
 
-        <div class="col-4 user_info_user_view" style="border: 1px solid white; padding: 10px;">
-            <img src="images/{{ user.profilePic }}" alt="Photo de profile de {{ user.userName }}" class="img-thumbnail profile_pic_userview">
+        <div class="col-4 user_info_user_view">
+            <img src="/images/{{ user.profilePic }}" alt="Photo de profile de {{ user.userName }}" class="img-thumbnail profile_pic_user_view">
             <h3>{{ user.firstname }} {{ user.lastname }}</h3>
 
             <p><span class="badge badge-info">{{ user.school.name }}</span> @{{ user.username }}</p>
@@ -24,8 +24,13 @@
             {% endif %}
             <p class="subscribers_info_user_view">{{ nb_subscriptions }} abonnement(s) • {{ nb_subscribers }} abonné(s)</p>
         </div>
-        <div class="col-8" style="border: 1px solid white;">
-            world
+        <div class="col-8">
+            {% for message in messages %}
+                <div class="container messages_blocks_user_view">
+                    <p>{{ message.content }}</p>
+                    <a href="">Répondre</a>
+                </div>
+            {% endfor %}
         </div>
 
     </div>
