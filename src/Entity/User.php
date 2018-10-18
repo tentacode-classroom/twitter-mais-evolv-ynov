@@ -36,7 +36,7 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      */
-    private $userName;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -121,12 +121,12 @@ class User implements UserInterface, \Serializable
 
     public function getUsername(): ?string
     {
-        return $this->userName;
+        return $this->username;
     }
 
-    public function setUserName(?string $userName): self
+    public function setUsername(?string $username): self
     {
-        $this->userName = $userName;
+        $this->username = $username;
 
         return $this;
     }
@@ -200,7 +200,7 @@ class User implements UserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->userName,
+            $this->username,
             $this->password,
             // see section on salt below
             // $this->salt,
@@ -212,7 +212,7 @@ class User implements UserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->userName,
+            $this->username,
             $this->password,
             // see section on salt below
             // $this->salt

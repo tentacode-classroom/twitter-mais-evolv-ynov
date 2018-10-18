@@ -18,7 +18,7 @@ class UserController extends AbstractController
 
         $user = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(['userName' => $username])
+            ->findOneBy(['username' => $username])
         ;
 
         $subscribed = false;
