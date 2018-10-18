@@ -30,7 +30,7 @@
 
 .messages_blocks_user_view {
     border: 2px solid grey;
-    background-color: #B2B2B2;
+    background-color: #dcdcdc;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 20px;
@@ -67,4 +67,8 @@
 
 .tweet_username_feed_view:hover {
     text-decoration: none;
+}
+
+.container_answers_message_view {
+    max-width: 900px;
 }

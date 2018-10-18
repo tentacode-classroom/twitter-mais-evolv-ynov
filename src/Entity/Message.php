@@ -33,11 +33,6 @@ class Message
     private $date;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $retweet_id;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -75,18 +70,6 @@ class Message
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getRetweetId(): ?int
-    {
-        return $this->retweet_id;
-    }
-
-    public function setRetweetId(?int $retweet_id): self
-    {
-        $this->retweet_id = $retweet_id;
 
         return $this;
     }
