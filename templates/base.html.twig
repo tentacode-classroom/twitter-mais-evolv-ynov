@@ -13,12 +13,35 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
+            {% if not is_granted('ROLE_USER') %}
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
             </li>
+            {% endif %}
+            {% if is_granted('ROLE_USER') %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('user',{'username': app.user.username}) }}">Mon Compte <span class="sr-only">(current)</span></a>
+            </li>
+            {% endif %}
+            {% if not is_granted('ROLE_USER') %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('registration') }}">Inscription</a>
             </li>
+            {% endif %}
+            {% if is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('login') }}">Connexion</a>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('admin') }}">Administration</a>
+            </li>
+            {% endif %}
         </ul>
 
 
