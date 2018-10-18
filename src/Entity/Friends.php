@@ -17,31 +17,20 @@ class Friends
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_followed;
+    private $follower;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="friends")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $follower;
+    private $followed;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdFollowed(): ?int
-    {
-        return $this->id_followed;
-    }
-
-    public function setIdFollowed(int $id_followed): self
-    {
-        $this->id_followed = $id_followed;
-
-        return $this;
     }
 
     public function getFollower(): ?User
@@ -52,6 +41,18 @@ class Friends
     public function setFollower(?User $user): self
     {
         $this->follower = $user;
+
+        return $this;
+    }
+
+    public function getFollowed(): ?User
+    {
+        return $this->followed;
+    }
+
+    public function setFollowed(?User $followed): self
+    {
+        $this->followed = $followed;
 
         return $this;
     }

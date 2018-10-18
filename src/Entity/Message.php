@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
@@ -23,13 +24,13 @@ class Message
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     max = 250,
+     *     maxMessage = "Le message est trop long"
+     * )
      */
     private $content;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $author_id;
 
     /**
      * @ORM\Column(type="datetime")
@@ -40,6 +41,12 @@ class Message
      * @ORM\Column(type="integer", nullable=true)
      */
     private $retweet_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
 
 
 
@@ -72,18 +79,6 @@ class Message
         return $this;
     }
 
-    public function getAuthorId(): ?int
-    {
-        return $this->author_id;
-    }
-
-    public function setAuthorId(int $author_id): self
-    {
-        $this->author_id = $author_id;
-
-        return $this;
-    }
-
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
@@ -104,6 +99,18 @@ class Message
     public function setRetweetId(?int $retweet_id): self
     {
         $this->retweet_id = $retweet_id;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

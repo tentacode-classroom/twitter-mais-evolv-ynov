@@ -1,17 +1,19 @@
 /*
-    /!\ TOUCHEZ PAS À CE FICHIER SVP /!\
+    /!\ NE TOUCHEZ PAS À CE FICHIER SVP /!\
  */
 
 .page_container_user_view {
     margin-top: 10px;
 }
 
-.profile_pic_userview {
+.profile_pic_user_view {
     max-width: 130px;
+    padding: 10px;
 }
 
 .user_info_user_view {
     text-align: center;
+    border-right: 1px solid white;
 }
 
 .user_bio_user_view {

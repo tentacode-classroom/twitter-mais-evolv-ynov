@@ -11,16 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/{username}", name="user")
+     * @Route("/user/{username}", name="user")
      */
     public function index(string $username)
     {
-        $currentUser = $this->getUser();
 
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->findOneBy(['userName' => $username])
         ;
+
+        $currentUser = $this->getUser();
 
         $subscribed = false;
 
@@ -29,7 +30,7 @@ class UserController extends AbstractController
                 ->getRepository(Friends::class)
                 ->findOneBy([
                     'follower' => $currentUser,
-                    'id_followed' => $user->getId()
+                    'followed' => $user
                 ]);
 
             if ($relation) {
@@ -42,7 +43,7 @@ class UserController extends AbstractController
         // get the number of subscribers
         $subscribers = $this->getDoctrine()
             ->getRepository(Friends::class)
-            ->findBy(['id_followed' => $user->getId()]);
+            ->findBy(['followed' => $user]);
         $nbSubscribers = count($subscribers);
 
         // get the number of subscriptions
@@ -54,7 +55,7 @@ class UserController extends AbstractController
         // User messages :
         $messages = $this->getDoctrine()
             ->getRepository(Message::class)
-            ->findBy(['author_id' => $user->getId()]);
+            ->findBy(['author' => $user]);
 
 
         return $this->render('user/index.html.twig', [
@@ -65,46 +66,47 @@ class UserController extends AbstractController
             'nb_subscriptions' => $nbSubscriptions,
             'messages' => $messages
         ]);
+
     }
 
     /**
      * @Route("/subscribe/{id}", name="subscribe")
      */
     public function subscribe(int $id) {
+        $subscribeTo = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['id' => $id]);
+
         $friendsRow = new Friends();
         $friendsRow->setFollower($this->getUser());
-        $friendsRow->setIdFollowed($id);
+        $friendsRow->setFollowed($subscribeTo);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($friendsRow);
         $entityManager->flush();
 
-        $userTarget = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findOneBy(['id' => $id]);
-
-        return $this->redirectToRoute('user', ['username' => $userTarget->getUsername()]);
+        return $this->redirectToRoute('user', ['username' => $subscribeTo->getUsername()]);
     }
 
     /**
      * @Route("/unsubscribe/{id}", name="unsubscribe")
      */
     public function unsubscribe(int $id) {
+        $unsubscribeTo = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['id' => $id]);
+
         $friendsRowToDelete = $this->getDoctrine()
             ->getRepository(Friends::class)
             ->findOneBy([
                 'follower' => $this->getUser(),
-                'id_followed' => $id
+                'followed' => $unsubscribeTo
             ]);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($friendsRowToDelete);
         $entityManager->flush();
 
-        $redirectUserTarget = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findOneBy(['id' => $id]);
-
-        return $this->redirectToRoute('user', ['username' => $redirectUserTarget->getUsername()]);
+        return $this->redirectToRoute('user', ['username' => $unsubscribeTo->getUsername()]);
     }
 }

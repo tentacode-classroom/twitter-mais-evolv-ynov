@@ -81,7 +81,7 @@ class User implements UserInterface, \Serializable
     private $school;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Friends", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Friends", mappedBy="followed")
      */
     private $friends;
 

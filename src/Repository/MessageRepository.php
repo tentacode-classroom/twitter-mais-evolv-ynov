@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Message;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -35,6 +36,18 @@ class MessageRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function findFeed(User $user) {
+
+        return $this->createQueryBuilder('m')
+            ->join('m.author',  'a')
+            ->join('a.friends',  'f', 'WITH', 'f.follower = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+
+    }
 
     /*
     public function findOneBySomeField($value): ?Message
