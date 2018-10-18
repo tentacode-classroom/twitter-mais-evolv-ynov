@@ -19,10 +19,9 @@ class FeedController extends AbstractController
             ->getRepository(Message::class)
             ->findFeed($user);
 
-        dump($messages);
-
         return $this->render('feed/index.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'messages' => $messages
         ]);
     }
 }
