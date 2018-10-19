@@ -34,8 +34,6 @@ class HomeController extends AbstractController
                 ->getRepository(Message::class)
                 ->findFeed($user);
 
-            dump($messages);
-
             return $this->render('home/feed.html.twig', [
                 'user' => $user,
                 'messages' => $messages

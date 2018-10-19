@@ -18,7 +18,7 @@ class Message
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      * @Assert\Length(
      *     max = 250,
@@ -28,7 +28,7 @@ class Message
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $date;
 
@@ -42,6 +42,11 @@ class Message
      * @ORM\ManyToOne(targetEntity="App\Entity\Message")
      */
     private $parent;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Message")
+     */
+    private $retweet;
 
 
 
@@ -94,6 +99,18 @@ class Message
     public function setParent(?self $parent): self
     {
         $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getRetweet(): ?self
+    {
+        return $this->retweet;
+    }
+
+    public function setRetweet(?self $retweet): self
+    {
+        $this->retweet = $retweet;
 
         return $this;
     }

@@ -26,10 +26,32 @@
         </div>
         <div class="col-8">
             {% for message in messages %}
-                <div class="container messages_blocks_user_view">
-                    <p>{{ message.content }}</p>
-                    <a href="">Répondre</a>
-                </div>
+                {% if message.retweet is null %}
+                    <div class="container messages_blocks_user_view">
+                        <p>{{ message.content }}</p>
+                        <a href="{{ path('answer', { 'messageId': message.id }) }}">Répondre</a>
+                        {% if current_user.id != user.id %}
+                            • <a href="{{ path('retweet', { 'messageId': message.id }) }}">Retweet</a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="container messages_blocks_user_view">
+                        <div class="row row_tweet_feed_view">
+                            <div class="col-2 image_tweet_zone">
+                                <img src="/images/{{ message.retweet.author.profilepic }}" alt="" class="img-thumbnail-tweet" />
+                            </div>
+                            <div class="col-9">
+                                <p><a href="/user/{{ message.retweet.author.username }}" class="tweet_username_feed_view">{{ message.retweet.author.firstname }} {{ message.retweet.author.lastname }}</a></p>
+                                <p>{{ message.retweet.content }}</p>
+                            </div>
+                        </div>
+                        {% if is_granted('ROLE_USER') %}
+                            <div class="tweet_action_buttons">
+                                <a href="{{ path('answer', { 'messageId': message.retweet.id }) }}">Répondre</a> • <a href="{{ path('retweet', { 'messageId': message.retweet.id }) }}">Retweeter</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
 

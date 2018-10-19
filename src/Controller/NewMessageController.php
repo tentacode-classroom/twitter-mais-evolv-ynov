@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Form\NewMessageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,5 +40,28 @@ class NewMessageController extends AbstractController
             'form' => $form->createView(),
             'user' => $user
         ]);
+    }
+
+    /**
+     * @Route("/retweet/{messageId}", name="retweet")
+     */
+    public function retweet(int $messageId) {
+        $message = $this->getDoctrine()
+            ->getRepository(Message::class)
+            ->findOneBy(['id' => $messageId]);
+
+        $newMessage = new Message();
+
+        $newMessage->setAuthor($this->getUser());
+        $newMessage->setDate(new \DateTime());
+        $newMessage->setRetweet($message);
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->persist($newMessage);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('home');
+
     }
 }

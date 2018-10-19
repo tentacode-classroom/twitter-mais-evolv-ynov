@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="tweet_action_buttons">
-                        <a href="{{ path('answer', { 'messageId': message.id }) }}">Répondre</a>
+                        <a href="{{ path('answer', { 'messageId': message.id }) }}">Répondre</a> •  <a href="{{ path('retweet', { 'messageId': message.id }) }}">Retweeter</a>
                     </div>
                 </div>
             {% endfor %}
