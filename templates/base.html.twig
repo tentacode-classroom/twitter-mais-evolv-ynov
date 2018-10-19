@@ -15,7 +15,7 @@
         <ul class="navbar-nav mr-auto">
             {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/{{ user.username }}">Mon profil</a>
+                    <a class="nav-link" href="/user/{{ app.user.username }}">Mon profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/new-message">Publier</a>
