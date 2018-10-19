@@ -55,7 +55,7 @@ class UserController extends AbstractController
         // User messages :
         $messages = $this->getDoctrine()
             ->getRepository(Message::class)
-            ->findBy(['author' => $user]);
+            ->findBy(['author' => $user], ['date' => 'DESC']);
 
 
         return $this->render('user/index.html.twig', [

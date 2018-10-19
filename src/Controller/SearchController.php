@@ -23,13 +23,6 @@ class SearchController extends AbstractController
 
 
 
-
-
-
-
-
-
-
         return $this->render('search/index.html.twig', [
 
             "search_results" => $search_results

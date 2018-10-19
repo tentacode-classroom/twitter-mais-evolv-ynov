@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Répondre au message{% endblock %}
+
+{% block body %}
+    <div class="container page_container_user_view">
+
+        <div class="container messages_blocks_user_view">
+            <div class="row row_tweet_feed_view">
+                <div class="col-2 image_tweet_zone">
+                    <img src="/images/{{ original_message.author.profilepic }}" alt="" class="img-thumbnail-tweet" />
+                </div>
+                <div class="col-9">
+                    <p><a href="/user/{{ original_message.author.username }}" class="tweet_username_feed_view">{{ original_message.author.firstname }} {{ original_message.author.lastname }}</a></p>
+                    <p>{{ original_message.content }}</p>
+                </div>
+            </div>
+        </div>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+        <div class="container container_answers_message_view">
+            {% for answer in answers %}
+                <div class="container messages_blocks_user_view">
+                    <div class="row row_tweet_feed_view">
+                        <div class="col-2 image_tweet_zone">
+                            <img src="/images/{{ answer.author.profilepic }}" alt="" class="img-thumbnail-tweet" />
+                        </div>
+                        <div class="col-9">
+                            <p><a href="/user/{{ answer.author.username }}" class="tweet_username_feed_view">{{ answer.author.firstname }} {{ answer.author.lastname }}</a></p>
+                            <p>{{ answer.content }}</p>
+                        </div>
+                    </div>
+                    <div class="tweet_action_buttons">
+                        <a href="{{ path('answer', { 'messageId': answer.id }) }}">Répondre</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
