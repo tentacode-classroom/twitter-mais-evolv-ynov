@@ -1,9 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}un truc bidon!{% endblock %}
 
 {% block body %}
 
+    {% for result in search_results %}
 
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+          <img  style="max-width: 60px" src="/images/{{ result.profilepic }}" />
+        </div>
+        <div class="col">
+            {{ result.username }}
+        </div>
+    </div>
+</div>
+
+    {% endfor %}
 
 {% endblock %}
