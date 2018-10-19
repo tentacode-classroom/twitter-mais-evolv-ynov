@@ -17,14 +17,15 @@ class SearchController extends AbstractController
     {
 
        // if (isset($_POST['motEntree']))
-        $search = $this->getDoctrine()
+        $search_results = $this->getDoctrine()
                         ->getRepository(User::class)
                         ->findNameLike($_POST["motEntree"]);
-        dump($search);
+
 
 
         return $this->render('search/index.html.twig', [
-            'controller_name' => 'SearchController',
+
+            "search_results" => $search_results
 
         ]);
     }
