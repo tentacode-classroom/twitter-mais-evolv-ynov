@@ -35,6 +35,9 @@
                     </div>
                     <div class="tweet_action_buttons">
                         <a href="{{ path('answer', { 'messageId': answer.id }) }}">Répondre</a>
+                        {% if answer.author.id != app.user.id %}
+                            • <a href="">Retweeter</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

@@ -44,6 +44,7 @@ class MessageRepository extends ServiceEntityRepository
             ->join('m.author',  'a')
             ->join('a.friends',  'f', 'WITH', 'f.follower = :user')
             ->setParameter('user', $user)
+            ->orderBy('m.date', 'DESC')
             ->getQuery()
             ->getResult();
 

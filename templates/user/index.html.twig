@@ -25,6 +25,8 @@
             <p class="subscribers_info_user_view">{{ nb_subscriptions }} abonnement(s) • {{ nb_subscribers }} abonné(s)</p>
         </div>
         <div class="col-8">
+            <h1>Mon profil</h1>
+            <p></p>
             {% for message in messages %}
                 {% if message.retweet is null %}
                     <div class="container messages_blocks_user_view">
