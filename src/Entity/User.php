@@ -50,6 +50,8 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Assert\File(mimeTypes={ "application/png" })
      */
     private $profilePic;
 

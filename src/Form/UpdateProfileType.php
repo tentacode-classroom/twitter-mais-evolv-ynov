@@ -9,9 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class UpdateProfileType extends AbstractType
 {
@@ -30,12 +28,8 @@ class UpdateProfileType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Adresse email'
             ])
-            ->add('profilePic')
             ->add('bio', TextAreaType::class, [
                 'label' => 'Bio'
-            ])
-            ->add('password', PasswordType::class, [
-                'label' => 'Mot de passe (obligatoire)'
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Mettre à jour'
