@@ -15,7 +15,6 @@ class UserController extends AbstractController
      */
     public function index(string $username)
     {
-
         $user = $this->getDoctrine()
             ->getRepository(User::class)
             ->findOneBy(['username' => $username])

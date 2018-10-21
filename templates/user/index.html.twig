@@ -26,6 +26,10 @@
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('give-role-admin', { 'userId': user.id }) }}">Donner un accès modérateur</a>
             {% endif %}
+
+            {% if is_granted('ROLE_MOD') %}
+                <a href="{{ path('delete-profile', { 'userId': user.id }) }}">Bannir l'utilisateur</a>
+            {% endif %}
         </div>
         <div class="col-8">
             <h1>Profil</h1>
