@@ -15,6 +15,9 @@
                     <p>{{ original_message.content }}</p>
                 </div>
             </div>
+            {% if is_granted('ROLE_MOD') %}
+                <a href="{{ path('delete-message', { 'messageId': original_message.id }) }}">Supprimer ce message</a>
+            {% endif %}
         </div>
 
         {{ form_start(form) }}

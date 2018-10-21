@@ -44,8 +44,6 @@ class ModerationController extends AbstractController
             $entityManager->flush();
         }
 
-
-
         // Supprimer les messages
         $messages = $this->getDoctrine()
             ->getRepository(Message::class)
@@ -60,7 +58,16 @@ class ModerationController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
-    
+
+    /**
+     * @Route("/moderation/delete-message/{messageId}", name="delete-message")
+     */
+    public function deleteMessage(int $messageId) {
+        $this->deleteRecursively($messageId);
+
+        return $this->redirectToRoute('home');
+    }
+
 
     public function deleteRecursively(int $messageId) {
         $message = $this->getDoctrine()
