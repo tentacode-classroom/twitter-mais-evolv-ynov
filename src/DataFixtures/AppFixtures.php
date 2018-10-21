@@ -48,6 +48,7 @@ class AppFixtures extends Fixture
         $user3->setProfilePic('default_profile.png');
         $user3->setBio('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate vel ex eget ultrices. Praesent lacus turpis, pharetra placerat suscipit at, vulputate vel metus. Vivamus ut elit purus.');
         $user3->setPassword('$2y$13$HPn8PXzrlJFt4mgoj3vJg.HbqiGDuLYFXRNuBjSc6F4L/LhXy/716');
+        $user3->setRoles(['ROLE_ADMIN']);
         $user3->setSchool($school1);
         $manager->persist($user3);
 
@@ -59,6 +60,7 @@ class AppFixtures extends Fixture
         $user4->setProfilePic('default_profile.png');
         $user4->setBio('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate vel ex eget ultrices. Praesent lacus turpis, pharetra placerat suscipit at, vulputate vel metus. Vivamus ut elit purus.');
         $user4->setPassword('$2y$13$HPn8PXzrlJFt4mgoj3vJg.HbqiGDuLYFXRNuBjSc6F4L/LhXy/716');
+        $user4->setRoles(['ROLE_MOD']);
         $user4->setSchool($school1);
         $manager->persist($user4);
 

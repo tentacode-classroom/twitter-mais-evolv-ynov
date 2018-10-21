@@ -28,6 +28,7 @@
             {% endif %}
 
             {% if is_granted('ROLE_MOD') %}
+                <br />
                 <a href="{{ path('delete-profile', { 'userId': user.id }) }}">Bannir l'utilisateur</a>
             {% endif %}
         </div>
