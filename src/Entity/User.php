@@ -195,6 +195,12 @@ class User implements UserInterface, \Serializable
         return $this->roles;
     }
 
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
     /** @see \Serializable::serialize() */
     public function serialize()
     {

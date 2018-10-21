@@ -5,15 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends AbstractController
+class ModerationController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/moderation", name="moderation")
      */
     public function index()
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+        return $this->render('moderation/index.html.twig', [
+            'controller_name' => 'ModerationController',
         ]);
     }
 }
