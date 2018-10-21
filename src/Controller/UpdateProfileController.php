@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Form\UpdatePasswordType;
+use App\Form\UploadImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\UpdateProfileType;
@@ -24,11 +26,13 @@ class UpdateProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid()) {
-            $updatedUser = new User();
+            #$updatedUser = new User();
             $updatedUser = $form->getData();
 
-            $encrypted = $encoder->encodePassword($updatedUser, $updatedUser->getPassword());
-            $updatedUser->setPassword($encrypted);
+            #$encrypted = $encoder->encodePassword($updatedUser, $updatedUser->getPassword());
+            #$updatedUser->setPassword($encrypted);
+
+            dump($updatedUser);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($updatedUser);

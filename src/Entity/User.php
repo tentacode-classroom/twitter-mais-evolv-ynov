@@ -50,8 +50,6 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     *
-     * @Assert\File(mimeTypes={ "application/png" })
      */
     private $profilePic;
 
@@ -62,7 +60,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\Length(
+     * @@Assert\Length(
      *     min = 6,
      *     max = 50,
      *     minMessage = "Le mot de passe doit faire au moins 6 caractères",

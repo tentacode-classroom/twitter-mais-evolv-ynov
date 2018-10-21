@@ -32,7 +32,7 @@
                     <div class="container messages_blocks_user_view">
                         <p>{{ message.content }}</p>
                         <a href="{{ path('answer', { 'messageId': message.id }) }}">Répondre</a>
-                        {% if current_user.id != user.id %}
+                        {% if app.user != null and app.user.id != user.id %}
                             • <a href="{{ path('retweet', { 'messageId': message.id }) }}">Retweet</a>
                         {% endif %}
                     </div>
