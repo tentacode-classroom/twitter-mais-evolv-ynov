@@ -4,20 +4,15 @@
 
 {% block body %}
 
-    {% for result in search_results %}
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-
-          <img  style="max-width: 60px" src="/images/{{ result.profilepic }}" />
-        </div>
-        <div class="col">
-            {{ result.username }}
-        </div>
+    <div class="container page_container_user_view">
+        {% for result in search_results %}
+            <div class="row" style="border: 1px solid black; background-color: #464646; font-size: 20px; padding: 10px;">
+                <div class="col-3"><img src="/images/{{ result.profilePic }}" alt="Photo de profile de {{ result.userName }}" class="img-thumbnail profile_pic_user_view" /></div>
+                <div class="col-5"><a href="{{ path('user', { 'username': result.username }) }}">{{ result.username }}</a></div>
+            </div>
+            <br />
+            <br />
+        {% endfor %}
     </div>
-</div>
-
-    {% endfor %}
 
 {% endblock %}
